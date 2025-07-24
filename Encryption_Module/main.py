@@ -1,5 +1,7 @@
 import sys
-from encryption import caesar, aes, rsa
+from classical_ciphers import caeser_cipher, vigenere_cipher
+from symmetric_encryption import aes
+from asymmetric_encryption import rsa
 from utils.file_io import read_text, write_text
 
 def main():
