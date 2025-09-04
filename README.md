@@ -99,4 +99,8 @@ These labs are meant to **bridge theory with practice**, giving students not jus
 
 This repository is licensed under the **MIT License** for educational use only.
 
+---
 
+🎓 **Enjoy exploring classical cryptography!**
+
+By: *I. K. Nti* (for educational purposes only)
