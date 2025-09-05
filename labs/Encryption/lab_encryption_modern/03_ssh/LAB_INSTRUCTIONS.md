@@ -1,6 +1,3 @@
-### 📄 `labs/Encryption/lab_encryption_modern/03_ssh/LAB_INSTRUCTIONS.md`
-
-
 # Lab: SSH Keys & Secure Remote Access
 
 ## 🎯 Objective
