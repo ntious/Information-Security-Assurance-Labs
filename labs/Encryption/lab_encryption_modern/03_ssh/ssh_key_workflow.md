@@ -1,0 +1,3 @@
+- Generate keypair (client identity) → publish *.pub to server/service.
+- First connection: verify server host key fingerprint → store in known_hosts.
+- Ongoing: client proves possession of private key; server matches public key.

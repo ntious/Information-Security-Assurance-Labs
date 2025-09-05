@@ -1,0 +1,8 @@
+# 🔐 Crypto artifacts (don’t commit!)
+labs/Encryption/lab_encryption_modern/01_openssl/private.pem
+labs/Encryption/lab_encryption_modern/01_openssl/public.pem
+labs/Encryption/lab_encryption_modern/01_openssl/signature.bin
+labs/Encryption/lab_encryption_modern/01_openssl/secret.enc
+
+labs/Encryption/lab_encryption_modern/02_tls/cert.pem
+labs/Encryption/lab_encryption_modern/02_tls/key.pem

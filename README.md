@@ -1,3 +1,4 @@
+
 # Information Security and Assurance – Educational Labs
 
 Welcome to the **Information Security and Assurance (ISA)** course repository.
@@ -19,45 +20,57 @@ Upon completion of this course, students will be able to:
 5. **Identify types of ethical issues regarding IT in daily life**
 6. **Understand and apply security/privacy-related laws, regulations, and standards**
 7. **Present a disaster recovery plan for recovery of information assets after an incident**
+8. **Demonstrate basic encryption and decryption using industry-standard tools (e.g., OpenSSL) and explain the role of protocols such as SSL/TLS, VPNs, and SSH in securing communications**
 
 ---
 
 ## 🧪 Labs Aligned to Outcomes
 
-Each lab is designed to support one or more learning outcomes.
+Each lab supports one or more outcomes.
 
-* **Lab 1: Information Asset Inventory**
+### Asset Identification & Risk Assessment Labs
+
+* **Lab 1: Asset Inventory**
   *Outcome 1* – Create an inventory of IT assets (hardware, software, data) and classify their value.
+* **Lab 2: Asset Prioritization**
+  *Outcome 1, 2* – Prioritize assets based on risk and business impact.
+* **Lab 3: Threat & Vulnerability Identification**
+  *Outcome 2* – Identify common threats/vulnerabilities against assets.
+* **Lab 4: Qualitative Risk Assessment**
+  *Outcome 2, 3* – Build a risk matrix to assess likelihood and impact.
+* **Lab 5: Risk Mitigation Strategies**
+  *Outcome 3* – Propose layered controls and mitigations.
 
-* **Lab 2: Threat Identification & Risk Matrix**
-  *Outcome 2* – Build a risk assessment matrix to evaluate and prioritize threats.
+### Encryption Labs
 
-* **Lab 3: Security Strategy & Architecture**
-  *Outcome 3* – Propose layered security controls (people, process, technology).
+* **Classical Ciphers Toolkit**
+  *Foundation* – Explore 11 classical ciphers (Caesar, Vigenère, Playfair, Rail Fence, etc.).
+  Builds intuition on substitution/transposition and prepares students for modern cryptography.
 
-* **Lab 4: Intrusion Detection Simulation**
-  *Outcome 4* – Simulate a brute force or port scan and create a response plan.
+* **Modern Encryption & Protocols**
+  *Outcome 8* – Meet the industry-standard tools requirement.
 
-* **Lab 5: Ethical Issues Case Study**
-  *Outcome 5* – Analyze real-world scenarios (privacy breaches, AI bias, data misuse).
-
-* **Lab 6: Laws & Regulations Review**
-  *Outcome 6* – Research and present security/privacy laws (HIPAA, FERPA, GDPR, etc.) with practical applications.
-
-* **Lab 7: Disaster Recovery Plan**
-  *Outcome 7* – Draft a disaster recovery plan for a hypothetical organization.
+  * **Lab 01: OpenSSL Essentials** — AES, RSA, digital signatures, and hashing.
+  * **Lab 02: TLS/SSL in Practice** — Inspect certificates and run a local TLS echo server.
+  * **Lab 03: SSH Keys & Secure Remote** — Generate keys, verify host fingerprints, and connect to GitHub via SSH.
+  * **Lab 04: VPN Concepts** — Explore WireGuard/OpenVPN configs and explain how VPNs secure communications.
 
 ---
 
 ## ⚙️ Setup Instructions
 
-You can run labs in **GitHub Codespaces** or locally.
+You can run labs in **GitHub Codespaces** (recommended) or locally.
 
-### Option 1: Run in Codespaces (Recommended)
+### Option 1: Run in Codespaces
 
 1. Fork this repository.
 2. Launch in **GitHub Codespaces**.
-3. Follow lab instructions in the `labs/` folder.
+3. Run the environment check:
+
+   ```bash
+   make check
+   ```
+4. Navigate to the lab folder you want and follow its `README.md`.
 
 ### Option 2: Run Locally
 
@@ -72,26 +85,36 @@ pip install -r requirements.txt
 ## 📂 Repository Structure
 
 ```
-├── labs/  
-│   ├── lab1_asset_inventory/  
-│   ├── lab2_risk_matrix/  
-│   ├── lab3_security_architecture/  
-│   ├── lab4_intrusion_response/  
-│   ├── lab5_ethics_case_study/  
-│   ├── lab6_regulations/  
-│   └── lab7_disaster_recovery/  
-├── resources/  
-│   ├── lecture_slides/  
-│   └── readings/  
-├── requirements.txt  
-└── README.md  
+labs/
+├── Asset Identification and Risk Assessment/
+│   ├── lab1_asset_inventory/
+│   ├── lab2_asset_prioritization/
+│   ├── lab3_threat_vulnerability_identification/
+│   ├── lab4_risk_assessment_qualitative/
+│   └── lab5_risk_mitigation_strategies/
+│
+└── Encryption/
+    ├── lab_encryption_classical/
+    │   ├── classical_ciphers_toolkit.py
+    │   └── LAB_INSTRUCTIONS.md
+    │
+    └── lab_encryption_modern/
+        ├── 01_openssl/
+        ├── 02_tls/
+        ├── 03_ssh/
+        └── 04_vpn/
+
+.devcontainer/   → Codespaces setup  
+Makefile         → Quick lab checks  
+README.md        → Course overview
 ```
 
 ---
 
 ## 🛡️ Learning Philosophy
 
-These labs are meant to **bridge theory with practice**, giving students not just academic knowledge but also the ability to simulate real-world information security scenarios.
+These labs are designed to **bridge theory with practice**, giving students not just academic knowledge but also the ability to simulate real-world security scenarios.
+Students will learn both **foundational principles** (classical ciphers, asset identification) and **modern practices** (OpenSSL, TLS, SSH, VPN).
 
 ---
 
@@ -101,6 +124,6 @@ This repository is licensed under the **MIT License** for educational use only.
 
 ---
 
-🎓 **Enjoy exploring classical cryptography!**
+🎓 *By: I. K. Nti* (for educational purposes only)
 
-By: *I. K. Nti* (for educational purposes only)
+---

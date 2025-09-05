@@ -1,10 +1,3 @@
-Perfect ✅ To keep it consistent with your other labs, here’s a **`LAB_INSTRUCTIONS.md`** for your **Classical Encryption Lab**.
-
-Save this inside:
-`labs/lab_encryption_classical/LAB_INSTRUCTIONS.md`
-
----
-
 # Lab: Exploring Classical Encryption
 
 ## 🎯 Objective
