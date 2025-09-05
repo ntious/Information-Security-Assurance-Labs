@@ -297,6 +297,7 @@ def main():
         input("\nPress Enter to continue...")
 
 if __name__ == "__main__":
-    if not shutil_available := hasattr(__import__('shutil'), 'which'):
+    shutil_available = hasattr(__import__('shutil'), 'which')  # pyright: ignore[reportUndefinedVariable]
+    if not shutil_available:
         pass
     main()
