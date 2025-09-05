@@ -37,7 +37,7 @@ It extends the classical ciphers labs by focusing on **modern cryptography and s
 
 1. Open this repo in **GitHub Codespaces**.  
 2. Verify the environment:  
-   ```bash
+```bash
    make check
 ````
 
