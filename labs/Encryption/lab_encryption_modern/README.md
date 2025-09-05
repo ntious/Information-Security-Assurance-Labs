@@ -1,8 +1,3 @@
-Perfect ✅ — here’s the **updated `labs/Encryption/lab_encryption_modern/README.md`** with the new helper commands included.
-
----
-
-````md
 # 🔐 Modern Encryption & Protocol Labs
 
 This module contains **hands-on labs using industry-standard tools**.  
