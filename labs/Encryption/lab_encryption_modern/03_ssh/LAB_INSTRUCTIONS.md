@@ -116,5 +116,3 @@ By completing this lab, you will be able to:
 * This lab is for **educational purposes only**.
 
 ```
-
-
