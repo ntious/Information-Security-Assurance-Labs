@@ -1,8 +1,3 @@
-Perfect 👌 — here’s the updated **README\_NmapToolkit.md** with your requested caution block added right after the **Features** section, and attribution at the bottom.
-
----
-
-````markdown
 # 🧰 Nmap Teaching Toolkit (Terminal)
 
 An instructor-friendly, student-ready CLI wrapper for **Nmap** that streamlines common scans into a simple menu. Perfect for labs where students spend more time **observing results** than **typing flags**.
