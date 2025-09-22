@@ -1,14 +1,15 @@
 #!/usr/bin/env python3
+# -*- coding: utf-8 -*-
 """
 student_recon_tool.py
 ====================================================
 A freshman-friendly, menu-driven Python tool that helps students analyze basic
-security threats and vulnerabilities through **network reconnaissance** tasks,
+security threats and vulnerabilities through network reconnaissance tasks,
 inspired by your course handout.
 
-⚠️ **ETHICS & PERMISSION**
+WARNING: ETHICS & PERMISSION
 ----------------------------------------------------------------
-Only scan systems you own or have *explicit written permission* to test.
+Only scan systems you own or have explicit written permission to test.
 Unauthorized scanning can be illegal and against university policy.
 
 This script:
@@ -16,16 +17,18 @@ This script:
 - Offers a simple menu of recon tasks (ping, DNS, WHOIS, traceroute, Nmap scans)
 - Saves outputs into a timestamped folder
 - Summarizes Nmap results (open ports, services, basic risk hints)
-- Is cross‑platform aware (Windows/macOS/Linux), and checks for required tools
+- Works on Windows/macOS/Linux, and checks for required tools
 
 Note: Some tasks require external tools to be installed:
-- `nmap`     : https://nmap.org/download.html
-- `whois`    : Often preinstalled on Linux/macOS (brew install whois). On Windows, consider WSL or third‑party whois.
-- `traceroute` / `tracert` : Built‑in on most systems (Windows uses `tracert`).
+- nmap     : https://nmap.org/download.html
+- whois    : Often preinstalled on Linux/macOS (brew install whois). 
+             On Windows, consider WSL or third-party whois.
+- traceroute / tracert : Built-in on most systems (Windows uses tracert).
 
-Author: Your Teaching Team
+Author: Isaac Kofi Nti
 License: MIT
 """
+
 from __future__ import annotations
 import os
 import re
