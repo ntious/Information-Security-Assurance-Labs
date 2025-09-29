@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-netstat_lab_helper.py — Menu-Driven Helper (Task 2–4)
+netstat_lab_helper.py — Menu-Driven Helper
 =====================================================================
 A freshman-friendly, menu-driven Python script to support the lab tasks
 starting at **Task 2 (Identify Active Connections)** through **Task 4**
@@ -36,7 +36,7 @@ QUICK START (Typical Flow for Task 2–3)
 REQUIREMENTS
 ---------------------------------------------------------------------
 • Python 3.8+
-• Ubuntu VM in UC Sandbox.
+• Ubuntu VM in Sandbox.
 • "netstat" (net-tools) or "ss" available on the VM. If netstat is missing,
   install net-tools with:    sudo apt update && sudo apt install -y net-tools
 
