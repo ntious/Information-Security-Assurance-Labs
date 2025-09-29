@@ -1,14 +1,63 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
+<<<<<<< HEAD
 netstat_lab_helper.py — Menu-Driven Helper (Updated)
+=======
+netstat_lab_helper.py — Menu-Driven Helper
+>>>>>>> f49c36459c093bb9b27aafdad1a239785737a739
 =====================================================================
 Supports Task 2–4 of the "Network Statistics Using netstat" lab.
 Adds deeper MySQL detection (TCP 3306/33060 + UNIX sockets) and
 guidance for running with sudo when PIDs are hidden.
 
+<<<<<<< HEAD
 Run with sudo for full visibility:
     sudo -E python3 netstat_lab_helper.py
+=======
+⚠️ ETHICS, SAFETY, AND CLASSROOM CONTEXT
+---------------------------------------------------------------------
+• Only run this on your **UC Sandbox Ubuntu VM** for this course.
+• Do NOT scan or kill processes on machines you do not own or manage.
+• Killing the wrong PID can disrupt services; confirm before proceeding.
+
+WHAT THIS SCRIPT DOES
+---------------------------------------------------------------------
+1) Detects whether **netstat** (net-tools) or **ss** (modern replacement) is
+   available. Uses whichever is present. (The lab mentions netstat; if it's
+   missing, this tool will transparently use ss.)
+2) Lists **active TCP/UDP connections** with process IDs (PIDs).
+3) Filters for **MySQL-related** connections (default port 3306) and tries to
+   show likely PIDs for the containerized MySQL service.
+4) Saves connection snapshots to timestamped text files in `lab_outputs/` to
+   help you collect **screenshot alternatives** and attach to your report.
+5) Provides a guided **kill-by-PID** workflow with confirmation prompts.
+6) Generates a **Reflection Template (Task 4)** you can fill in and submit.
+
+QUICK START (Typical Flow for Task 2–3)
+---------------------------------------------------------------------
+1) Option 1 or 2: View active connections (all / MySQL-focused).
+2) Option 4: Save a snapshot of the current connections for your report.
+3) Option 5: If instructed, terminate a malicious MySQL PID (with caution).
+4) Option 6: Generate the reflection template for Task 4 and fill it in.
+
+REQUIREMENTS
+---------------------------------------------------------------------
+• Python 3.8+
+• Ubuntu VM in Sandbox.
+• "netstat" (net-tools) or "ss" available on the VM. If netstat is missing,
+  install net-tools with:    sudo apt update && sudo apt install -y net-tools
+
+NOTES FOR SCREENSHOTS
+---------------------------------------------------------------------
+• This script saves outputs under ./lab_outputs with timestamps. You can
+  screenshot either the terminal output or include the saved text files in your
+  Word/PDF report.
+
+Author: Your Course Team
+Version: 1.0
+License: MIT (for classroom use)
+>>>>>>> f49c36459c093bb9b27aafdad1a239785737a739
 """
 import os
 import re
