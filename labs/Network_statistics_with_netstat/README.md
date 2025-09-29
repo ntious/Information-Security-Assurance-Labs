@@ -1,6 +1,6 @@
 # Netstat Lab Helper — README
 
-This README accompanies `netstat_lab_helper.py`, a menu‑driven helper for the **Network Statistics Using netstat** lab (Tasks 2–4). It’s designed for freshmen and runs on your **UC Sandbox Ubuntu VM**.
+This README accompanies `netstat_lab_helper.py`, a menu‑driven helper for the **Network Statistics Using netstat**. It’s designed for freshmen and runs on your **Sandbox Ubuntu VM**.
 
 ---
 ## What this tool does
@@ -13,13 +13,13 @@ This README accompanies `netstat_lab_helper.py`, a menu‑driven helper for the 
 
 ---
 ## Prerequisites
-- UC Sandbox Ubuntu VM
+- Sandbox Ubuntu VM
 - Python 3.8+
 - `netstat` or `ss` available. If `netstat` is missing, run:
   ```bash
   sudo apt update && sudo apt install -y net-tools
   ```
-- Ensure the **MySQL container (`mysqlData`)** is running in UC Sandbox.
+- Ensure the **MySQL container (`mysqlData`)** is running in Sandbox.
 
 > **Credentials (from lab brief):**
 > - Login: `admin` / `infosecure123456789`
@@ -67,7 +67,7 @@ This README accompanies `netstat_lab_helper.py`, a menu‑driven helper for the 
 
 ---
 ## Safety & Ethics
-- Only operate on your **course VM** and lab containers.
+- Only operate on your **VM** and lab containers.
 - Killing the wrong PID can disrupt services. Confirm before proceeding.
 - When unsure, ask during class or office hours.
 
