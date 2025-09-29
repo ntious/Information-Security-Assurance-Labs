@@ -1,5 +1,5 @@
 # UFW Firewall Lab Helper (Freshman-Friendly)
-
+## Designed by I. K. NTI
 This repo contains a Python script to guide freshmen through **Implementing Technical Security Controls – Part 1** using the **UFW firewall** on Ubuntu. It follows the instructor handout and adds menu-driven automation, helpful prompts, and optional advanced tasks.
 
 ---
@@ -103,6 +103,30 @@ You’ll see a menu with numbered options. Read each description and follow alon
 This helper aligns with your lab slides on **Technical Security Controls** for Ubuntu UFW (allow/deny ports, IP-based rules, and verification tests).
 
 ---
+Here’s a ready-to-use snippet you can drop into your lab README or Canvas instructions:
 
+---
+
+### ⚠️ Important: Use Python 3
+
+This lab requires **Python 3.8 or higher**.
+If you run the script with `python` (which may point to Python 2 on some systems), you will get errors like:
+
+```
+SyntaxError: invalid syntax
+```
+
+✅ Always run the helper with:
+
+```bash
+python3 firewall_lab_helper.py
+```
+
+or, if you made it executable:
+
+```bash
+chmod +x firewall_lab_helper.py
+./firewall_lab_helper.py
+```
 ## License
 For educational use in your course.
