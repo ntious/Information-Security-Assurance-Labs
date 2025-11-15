@@ -2,7 +2,11 @@
 """
 Classical Ciphers Toolkit (All-in-One)
 =====================================
-
+# How to run (for students):
+# 1. Open a terminal in this folder.
+# 2. Run:  python classical_ciphers_toolkit.py
+# 3. Use the menu to pick a cipher and follow the prompts.
+----------------------------------------------------------
 Includes:
 1. Caesar (Encrypt / Decrypt / Brute Force / Auto Decrypt)
 2. Atbash (Encrypt / Decrypt, symmetric)
@@ -284,19 +288,40 @@ def rail_fence_decrypt(cipher, rails):
     return ''.join(out)
 
 def rail_fence_menu():
+    """
+    Menu wrapper for the Rail Fence cipher.
+
+    Notes for students:
+    - Rail Fence is a transposition cipher: it changes the POSITION of characters,
+      not the letters themselves.
+    - Try different rail values (2, 3, 4) and see how the pattern changes.
+    """
     while True:
         print("\n--- Rail Fence Cipher ---")
         print("E - Encrypt | D - Decrypt | X - Back")
         choice = input("Choice: ").strip().upper()
-        if choice == "E":
+
+        if choice in ("E", "D"):
             txt = input("Enter text: ")
-            rails = int(input("Enter number of rails: "))
-            print("Encrypted:", rail_fence_encrypt(txt, rails))
-        elif choice == "D":
-            txt = input("Enter text: ")
-            rails = int(input("Enter number of rails: "))
-            print("Decrypted:", rail_fence_decrypt(txt, rails))
-        elif choice == "X": break
+            try:
+                rails = int(input("Enter number of rails (>=2): "))
+                if rails < 2:
+                    print("Rails must be 2 or more.")
+                    continue
+            except ValueError:
+                print("Please enter a valid number (e.g., 2, 3, 4).")
+                continue
+
+            if choice == "E":
+                print("Encrypted:", rail_fence_encrypt(txt, rails))
+            else:
+                print("Decrypted:", rail_fence_decrypt(txt, rails))
+
+        elif choice == "X":
+            break
+        else:
+            print("Invalid option. Please choose E, D, or X.")
+
 
 # -------------------------
 # Columnar Transposition
@@ -475,33 +500,48 @@ def hill_decrypt(cipher, key_matrix):
     return out
 
 def hill_menu():
+    """
+    Menu wrapper for the Hill cipher (2x2).
+
+    Notes for students:
+    - Hill is a polygraphic cipher: it works on PAIRS of letters using matrix math.
+    - Not every 2x2 matrix works. The matrix must be invertible modulo 26.
+    - If you see an error about the inverse or determinant, try a different matrix.
+    """
     while True:
         print("\n--- Hill Cipher (2x2) ---")
         print("E - Encrypt | D - Decrypt | X - Back")
         choice = input("Choice: ").strip().upper()
-        if choice == "E":
+
+        if choice in ("E", "D"):
             txt = input("Enter text: ")
-            print("Enter 2x2 key matrix (numbers 0-25):")
-            a = int(input("a11: ")); b = int(input("a12: "))
-            c = int(input("a21: ")); d = int(input("a22: "))
-            key = np.array([[a, b], [c, d]], dtype=int)
+            print("Enter 2x2 key matrix (numbers 0-25).")
             try:
-                enc = hill_encrypt(txt, key)
-                print("Encrypted:", enc)
+                a = int(input("a11: "))
+                b = int(input("a12: "))
+                c = int(input("a21: "))
+                d = int(input("a22: "))
+            except ValueError:
+                print("All entries must be integers between 0 and 25.")
+                continue
+
+            key = np.array([[a, b], [c, d]], dtype=int)
+
+            try:
+                if choice == "E":
+                    enc = hill_encrypt(txt, key)
+                    print("Encrypted:", enc)
+                else:
+                    dec = hill_decrypt(txt, key)
+                    print("Decrypted:", dec)
             except Exception as e:
                 print("Error:", e)
-        elif choice == "D":
-            txt = input("Enter cipher text: ")
-            print("Enter 2x2 key matrix (numbers 0-25):")
-            a = int(input("a11: ")); b = int(input("a12: "))
-            c = int(input("a21: ")); d = int(input("a22: "))
-            key = np.array([[a, b], [c, d]], dtype=int)
-            try:
-                dec = hill_decrypt(txt, key)
-                print("Decrypted:", dec)
-            except Exception as e:
-                print("Error:", e)
-        elif choice == "X": break
+                print("Tip: Try a different key matrix. Not all matrices are valid for Hill.")
+        elif choice == "X":
+            break
+        else:
+            print("Invalid option. Please choose E, D, or X.")
+
 
 # -------------------------
 # Autokey Cipher
@@ -606,30 +646,116 @@ def hybrid_menu():
             print("Decrypted:", hybrid_decrypt(txt, step))
         elif choice == "X":
             break
+#-------------------------
+#Demo
+#-------------------------
+def demo_mode():
+    """
+    Quick demo mode for instructors or students.
+
+    This runs a few sample encrypt/decrypt operations so you can see
+    how different ciphers behave without typing everything manually.
+    """
+    print("\n--- Demo Mode: Quick Showcase ---")
+    msg = "HELLO WORLD"
+    print(f"Plaintext: {msg}")
+
+    # Caesar demo
+    c = caesar_cipher(msg, 3, "encrypt")
+    print(f"Caesar (shift 3): {c} -> {caesar_cipher(c, 3, 'decrypt')}")
+
+    # Vigenere demo
+    v = vigenere_encrypt(msg, "KEY")
+    print(f"Vigenere (KEY):   {v} -> {vigenere_decrypt(v, 'KEY')}")
+
+    # Atbash demo
+    a = atbash_cipher(msg)
+    print(f"Atbash:           {a} -> {atbash_cipher(a)}")
+
+    print("\nTip: For your lab report, try at least 3 different ciphers,")
+    print("record the plaintext, ciphertext, and decrypted text, and")
+    print("write a short note about the strengths/weaknesses of each.")
+    print("--- End Demo ---")
 
 # -------------------------
 # Main Menu
 # -------------------------
 def main():
+    """
+    Main entry point for the Classical Ciphers Toolkit.
+
+    How to use this as a student:
+    - Choose a cipher from the menu (start with Caesar or Vigenere if you're unsure).
+    - Follow the prompts to encrypt and decrypt messages.
+    - For your lab:
+      * Try at least 3 different ciphers.
+      * Record plaintext, ciphertext, and decrypted text.
+      * Reflect on why some ciphers are easier to break than others.
+    """
     while True:
         print("\n=== Classical Ciphers Toolkit ===")
-        print("1 - Caesar | 2 - Atbash | 3 - Affine | 4 - Vigenere")
-        print("5 - Rail Fence | 6 - Columnar | 7 - Playfair | 8 - Hill")
-        print("9 - Autokey | 10 - Beaufort | 11 - Hybrid (Caesar→Atbash) | Q - Quit")
-        choice = input("Choose: ").strip().upper()
-        if choice == "1": caesar_menu()
-        elif choice == "2": atbash_menu()
-        elif choice == "3": affine_menu()
-        elif choice == "4": vigenere_menu()
-        elif choice == "5": rail_fence_menu()
-        elif choice == "6": columnar_menu()
-        elif choice == "7": playfair_menu()
-        elif choice == "8": hill_menu()
-        elif choice == "9": autokey_menu()
-        elif choice == "10": beaufort_menu()
-        elif choice == "11": hybrid_menu()
+        print("0 - Help / About")
+        print("D - Demo Mode (quick examples)")
+        print("-------------------------------------------------")
+        print("1 - Caesar        | 2 - Atbash       | 3 - Affine")
+        print("4 - Vigenere      | 5 - Rail Fence   | 6 - Columnar")
+        print("7 - Playfair      | 8 - Hill (2x2)   | 9 - Autokey")
+        print("10 - Beaufort     | 11 - Hybrid (Caesar→Atbash)")
+        print("Q - Quit")
+        choice = input("Choose an option: ").strip().upper()
+
+        if choice == "0":
+            print("""
+[Help / About]
+
+This toolkit lets you experiment with classical encryption methods.
+You can:
+- Encrypt messages to see how each cipher transforms plaintext.
+- Decrypt messages to recover the original text.
+- Use brute force or auto-decrypt (for Caesar) to simulate attacks.
+
+Important:
+- These ciphers are for LEARNING ONLY.
+- They are NOT secure for real-world use.
+- For your lab, try at least 3 different ciphers and document:
+  * Plaintext
+  * Ciphertext
+  * Decrypted text
+  * One or two sentences on strengths/weaknesses.
+""")
+
+        elif choice == "D":
+            demo_mode()
+
+        elif choice == "1":
+            caesar_menu()
+        elif choice == "2":
+            atbash_menu()
+        elif choice == "3":
+            affine_menu()
+        elif choice == "4":
+            vigenere_menu()
+        elif choice == "5":
+            rail_fence_menu()
+        elif choice == "6":
+            columnar_menu()
+        elif choice == "7":
+            playfair_menu()
+        elif choice == "8":
+            hill_menu()
+        elif choice == "9":
+            autokey_menu()
+        elif choice == "10":
+            beaufort_menu()
+        elif choice == "11":
+            hybrid_menu()
         elif choice == "Q":
-            print("Goodbye!"); break
+            print("Goodbye! Thanks for exploring classical ciphers.")
+            break
+        else:
+            print("Invalid choice. Please select a valid menu option.")
+
 
 if __name__ == "__main__":
+
     main()
