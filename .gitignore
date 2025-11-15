@@ -6,3 +6,12 @@ labs/Encryption/lab_encryption_modern/01_openssl/secret.enc
 
 labs/Encryption/lab_encryption_modern/02_tls/cert.pem
 labs/Encryption/lab_encryption_modern/02_tls/key.pem
+__pycache__/
+*.pyc
+.env
+*.env
+.DS_Store
+.ipynb_checkpoints/
+.vscode/
+.idea/
+
