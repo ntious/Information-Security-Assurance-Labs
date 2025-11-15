@@ -113,7 +113,6 @@ Violations of this Code of Conduct may result in:
 * Removal of pull request or issue privileges
 * Reversion or rejection of repository changes
 * Reporting to the course instructor or department
-* Academic integrity review per UC policy
 * Removal from project participation
 
 
