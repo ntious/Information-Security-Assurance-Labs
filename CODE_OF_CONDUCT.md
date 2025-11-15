@@ -116,13 +116,6 @@ Violations of this Code of Conduct may result in:
 * Academic integrity review per UC policy
 * Removal from project participation
 
-Serious violations (e.g., malicious cybersecurity behavior) may result in:
-
-* Course penalties
-* Departmental disciplinary actions
-* Reporting to UC Information Security Office
-
----
 
 ## 📫 Reporting Issues
 
@@ -130,7 +123,7 @@ To report concerns, violations, or misconduct:
 
 1. **Privately contact the course instructor:**
    *Dr. Isaac K. Nti*
-   Email: *(your UC email)*
+   Email: *(ntious1+git@gmail.com)*
 
 2. Report through GitHub security advisories (for vulnerabilities).
 
