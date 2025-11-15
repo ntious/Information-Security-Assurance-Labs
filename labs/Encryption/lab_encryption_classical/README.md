@@ -8,8 +8,7 @@ It allows students to explore, encrypt, decrypt, and experiment with **11 major 
 # 🧩 Classical Ciphers Toolkit
 
 [![Launch Binder](https://mybinder.org/badge_logo.svg)](
-https://mybinder.org/v2/gh/ntious/Information-Security-Assurance-Labs/HEAD?filepath=labs/Encryption/lab_encryption_classical/classical_ciphers_toolkit.ipynb
-)
+https://mybinder.org/v2/gh/ntious/Information-Security-Assurance-Labs/HEAD?filepath=labs/Encryption/lab_encryption_classical)
 
 This Python toolkit is an **interactive playground for classical cryptography**.
 
@@ -140,4 +139,5 @@ By: *I. K. Nti* (for educational purposes only)
 
 
 ---
+
 
