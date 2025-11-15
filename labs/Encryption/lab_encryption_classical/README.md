@@ -61,7 +61,19 @@ You’ll see a menu like:
 9 - Autokey | 10 - Beaufort | 11 - Hybrid (Caesar→Atbash) | Q - Quit
 Choose:
 ```
+### 🚀 Run in Your Browser (No Installation Needed)
 
+If you cannot install Python locally, click the **Binder** button above.  
+Once the environment loads:
+
+1. Open the file `classical_ciphers_toolkit.ipynb`
+2. Run the first cell  
+3. The full cipher menu will appear in the Jupyter terminal  
+#### 🧩 Classical Ciphers Toolkit
+
+[![Launch Binder](https://mybinder.org/badge_logo.svg)](
+https://mybinder.org/v2/gh/ntious/Information-Security-Assurance-Labs/HEAD?filepath=labs/Encryption/lab_encryption_classical)
+You can now use all 11 ciphers directly in your browser.
 ---
 
 ## 🕹️ Usage Guide
@@ -128,3 +140,4 @@ By: *I. K. Nti* (for educational purposes only)
 
 
 ---
+
