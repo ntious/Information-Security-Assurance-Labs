@@ -1,105 +1,182 @@
-# Lab: Exploring Classical Encryption
+# 🔐 **Lab: Exploring Classical Encryption**
 
-## 🎯 Objective
+## 🎯 **Lab Purpose**
 
-The purpose of this lab is to help students **understand and experiment with classical ciphers**. By using a Python toolkit, you will encrypt, decrypt, and analyze text with **11 major historical ciphers**, gaining hands-on experience with substitution and transposition techniques.
+In this lab, you will explore how early cryptographic systems worked by experimenting with a Python-based **Classical Ciphers Toolkit**. You will encrypt and decrypt messages using a variety of substitution and transposition ciphers, analyze how they operate, and understand **why classical ciphers became insecure over time**.
 
----
-
-## 📖 Background
-
-Cryptography has evolved over centuries. Early systems like Caesar or Vigenère were once effective but are now easy to break with modern computing. Studying these classical ciphers provides valuable insight into the **principles of encryption, weaknesses of simple systems, and the evolution toward modern cryptography**.
-
-This activity supports the course learning outcome:
-👉 **Identify and apply cryptographic techniques to secure information.**
+This lab supports the course outcome:
+👉 **Apply cryptographic techniques to secure information and recognize their limitations.**
 
 ---
 
-## 🛠️ Prerequisites
+# 🧠 **Why This Matters**
 
-* Python **3.7+**
-* `numpy` library (for Hill cipher math)
+Before modern encryption existed, early ciphers like **Caesar, Vigenère, Playfair, and Hill** were considered secure. Today, they can be broken quickly—even by beginners—because computing power and mathematical analysis have advanced.
 
-  ```bash
-  pip install numpy
-  ```
-* Basic understanding of substitution and transposition concepts
+Working with these ciphers helps you:
 
----
-
-## 📝 Tasks
-
-### Step 1 – Run the Toolkit
-
-* Open a terminal and run:
-
-  ```bash
-  python classical_ciphers_toolkit.py
-  ```
-* Explore the menu of ciphers.
-
-### Step 2 – Encrypt and Decrypt Messages
-
-* For each cipher, try encrypting and decrypting a short message (e.g., `"HELLO WORLD"`).
-* Record your results.
-
-### Step 3 – Experiment with Keys
-
-* Change keys (shifts, matrices, or keywords) and observe how outputs change.
-* Note how some ciphers (e.g., Playfair, Hill) add padding characters like `X`.
-
-### Step 4 – Analyze Strengths and Weaknesses
-
-* Test brute-force attacks (Caesar, Affine).
-* Discuss why some ciphers are easy to break.
-
-### Step 5 – Document Your Findings
-
-* Record results for at least **3 different ciphers**.
-* Summarize what makes each cipher strong or weak.
+* Understand the *foundational ideas* behind encryption
+* See how keys, shifts, and matrices transform plaintext
+* Practice brute-force reasoning
+* Appreciate the importance of modern cryptography like AES and RSA
 
 ---
 
-## 📂 Deliverables
+# 🛠️ **What You Need Before Starting**
 
-* A short **report** (Markdown, Word, or PDF) including:
+### ✅ Python 3.7 or above
 
-  * Screenshots of encryption/decryption results
-  * Example plaintext → ciphertext → recovered plaintext
-  * Notes on strengths and weaknesses of at least 3 ciphers
+### ✅ The `numpy` package (used for Hill cipher matrix operations)
+
+Install if needed:
+
+```bash
+pip install numpy
+```
+
+### ✅ The provided file:
+
+* `classical_ciphers_toolkit.py`
 
 ---
 
-## ✅ Evaluation Criteria
+# 📂 **Lab Steps**
 
-* **Completion** – Did you test at least 3 ciphers?
-* **Accuracy** – Did your encrypt/decrypt results match expectations?
-* **Analysis** – Did you explain why some ciphers are weaker/stronger?
-* **Presentation** – Is your report clear, structured, and easy to follow?
+## **Step 1 — Launch the Toolkit**
+
+From the terminal:
+
+```bash
+python classical_ciphers_toolkit.py
+```
+
+Browse the menu to see all available ciphers.
+The toolkit lets you try **11 classical ciphers**, including:
+
+* Caesar
+* Vigenère
+* Affine
+* Atbash
+* Playfair
+* Rail Fence
+* Hill
+* …and more
 
 ---
 
-## 📘 Learning Outcomes
+## **Step 2 — Encrypt & Decrypt Sample Messages**
+
+Choose **at least three ciphers** from the menu and encrypt a simple message:
+
+Example plaintext:
+
+```
+HELLO WORLD
+```
+
+For each cipher:
+
+1. Encrypt the message
+2. Decrypt it back to plaintext
+3. Capture the outputs (screenshot or copy/paste)
+
+---
+
+## **Step 3 — Experiment With Keys**
+
+Try changing:
+
+* Shift amounts (Caesar)
+* Keywords (Vigenère)
+* 2×2 or 3×3 matrices (Hill)
+* Playfair digraph rules
+
+Observe:
+
+* How outputs change
+* Whether padding characters like **X** appear
+* How the structure of the cipher affects complexity
+
+---
+
+## **Step 4 — Try Attacks and Weakness Testing**
+
+Use the toolkit or your own reasoning to examine weaknesses:
+
+* **Brute force** the Caesar cipher
+* Try to break patterns in Vigenère
+* Notice how Atbash needs *no key*
+* Observe how Rail Fence leaks patterns
+
+Reflect on:
+
+> Why are these ciphers easy to break today?
+
+---
+
+## **Step 5 — Document Your Findings**
+
+You will produce a short report summarizing:
+
+* Three ciphers you explored
+* Your encryption/decryption results
+* What you learned about each cipher
+* Strengths and weaknesses
+* Why modern cryptography replaces them
+
+---
+
+# 📤 **What to Submit**
+
+Submit a **short report** (Word, PDF, or Markdown) containing:
+
+* Your name and course section
+* Screenshots of toolkit outputs
+* Plaintext → Ciphertext → Decrypted text
+* Notes on strengths and weaknesses of each cipher
+* 1–2 sentences comparing classical and modern encryption
+
+---
+
+# 📘 **Grading Criteria (20 points)**
+
+| Criterion                 | Points | Description                                                                |
+| ------------------------- | ------ | -------------------------------------------------------------------------- |
+| **Cipher Exploration**    | 5      | Tested at least 3 ciphers with clear screenshots/results                   |
+| **Accuracy of Results**   | 5      | Encryption/decryption outputs make sense and match expected behavior       |
+| **Analysis & Reflection** | 7      | Clear explanation of strengths/weaknesses and why these ciphers fail today |
+| **Presentation Quality**  | 3      | Well-organized, readable report with labels and explanations               |
+
+---
+
+# 🎓 **Learning Outcomes**
 
 By completing this lab, you will be able to:
 
-* Apply substitution and transposition ciphers in practice
-* Compare the effectiveness of different classical ciphers
-* Recognize limitations of early cryptographic systems
-* Explain why modern encryption is necessary
+* Apply multiple classical ciphers to encrypt and decrypt data
+* Compare the structure and security of substitution vs. transposition ciphers
+* Identify vulnerabilities such as brute force and frequency analysis
+* Explain why modern encryption algorithms are necessary and more secure
 
 ---
 
-## 📊 Example Report Structure
+# 📊 **Example Report Format**
 
-| Cipher   | Plaintext   | Encrypted   | Decrypted   | Notes                                                       |
-| -------- | ----------- | ----------- | ----------- | ----------------------------------------------------------- |
-| Caesar   | HELLO       | KHOOR       | HELLO       | Easy to brute-force                                         |
-| Atbash   | HELLO WORLD | SVOOL DLIOW | HELLO WORLD | Symmetric, no key needed                                    |
-| Vigenère | HELLO       | RIJVS       | HELLO       | Stronger than Caesar, but crackable with frequency analysis |
+| Cipher   | Plaintext   | Encrypted   | Decrypted   | Notes                                               |
+| -------- | ----------- | ----------- | ----------- | --------------------------------------------------- |
+| Caesar   | HELLO       | KHOOR       | HELLO       | Easy to brute-force; only 25 key options            |
+| Atbash   | HELLO WORLD | SVOOL DLIOW | HELLO WORLD | No key needed; substitution pattern fixed           |
+| Vigenère | HELLO       | RIJVS       | HELLO       | Stronger than Caesar; cracked with Kasiski analysis |
 
 ---
 
-## ⚠️ Ethical Reminder
+# ⚠️ **Academic Integrity & Ethical Use**
 
-This toolkit is for **educational purposes only**. These ciphers are outdated and should **never be used for real-world data protection**. The goal is to learn cryptographic fundamentals, not to create secure systems.
+* This toolkit is for **learning only**.
+* These ciphers should **not** be used to secure real data.
+* Your submitted work must be **your own**.
+* Discussions are allowed, but copying answers is not.
+
+---
+
+Just tell me!
