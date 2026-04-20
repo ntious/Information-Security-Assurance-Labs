@@ -1,16 +1,33 @@
 # 🧩 Classical Ciphers Toolkit
 
 This Python toolkit is an **interactive playground for classical cryptography**.
-It allows students to explore, encrypt, decrypt, and experiment with **11 major historical ciphers**.
+It allows students to explore, encrypt, decrypt, and experiment with **11 major historical ciphers** in a hands-on, menu-driven environment.
 
 ⚠️ **Note**: This lab is for **educational use only**. These ciphers are not secure by modern standards and should not be used in real-world applications.
 
-# 🧩 Classical Ciphers Toolkit
+---
 
-[![Launch Binder](https://mybinder.org/badge_logo.svg)](
-https://mybinder.org/v2/gh/ntious/Information-Security-Assurance-Labs/HEAD?filepath=labs/Encryption/lab_encryption_classical?urlpath=lab)
+## 🚀 Run in Your Browser (No Installation Needed)
 
-This Python toolkit is an **interactive playground for classical cryptography**.
+[![Launch Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/ntious/Information-Security-Assurance-Labs/HEAD?urlpath=lab/tree/Encryption/lab_encryption_classical)
+
+Binder allows you to run this lab directly in your browser without installing Python.
+
+### ▶️ How to Run in Binder
+
+Once Binder loads:
+
+1. Open **Terminal** from JupyterLab (top menu → *File → New → Terminal*)
+2. Run the script:
+
+```bash
+python classical_ciphers_toolkit.py
+```
+
+3. Use the interactive cipher menu in the terminal
+
+> 💡 This lab is designed as a **Python script**, not a notebook.
+> Students interact with it via the terminal.
 
 ---
 
@@ -18,87 +35,95 @@ This Python toolkit is an **interactive playground for classical cryptography**.
 
 The toolkit includes:
 
-1. **Caesar Cipher** (shift-based)
-2. **Atbash Cipher** (reversal substitution)
-3. **Affine Cipher** (linear substitution, `a` and `b` keys)
-4. **Vigenère Cipher** (keyword-based shift)
-5. **Rail Fence Cipher** (zigzag transposition)
-6. **Columnar Transposition Cipher** (keyword columnar readout)
-7. **Playfair Cipher** (5×5 digraph substitution)
-8. **Hill Cipher (2×2)** (matrix-based substitution)
-9. **Autokey Cipher** (key extended with plaintext)
-10. **Beaufort Cipher** (variant of Vigenère, symmetric)
-11. **Hybrid Caesar → Atbash** (Caesar shift, then Atbash)
+1. **Caesar Cipher** – Shift-based substitution
+2. **Atbash Cipher** – Alphabet reversal
+3. **Affine Cipher** – Linear transformation using keys `a` and `b`
+4. **Vigenère Cipher** – Keyword-based polyalphabetic cipher
+5. **Rail Fence Cipher** – Zigzag transposition
+6. **Columnar Transposition Cipher** – Keyword-based column rearrangement
+7. **Playfair Cipher** – 5×5 digraph substitution
+8. **Hill Cipher (2×2)** – Matrix-based encryption (requires `numpy`)
+9. **Autokey Cipher** – Key extended with plaintext
+10. **Beaufort Cipher** – Variant of Vigenère (symmetric)
+11. **Hybrid Cipher (Caesar → Atbash)** – Layered transformation
 
 ---
 
-## 🚀 Getting Started
+## 🚀 Getting Started (Local Setup)
 
 ### Requirements
 
 * Python **3.7+**
-* `numpy` library (for Hill cipher math):
+* `numpy` (for Hill Cipher)
 
-  ```bash
-  pip install numpy
-  ```
+Install dependencies:
 
-### Running the Toolkit
+```bash
+pip install numpy
+```
 
-Run the main script:
+---
+
+### ▶️ Run Locally
 
 ```bash
 python classical_ciphers_toolkit.py
 ```
 
-You’ll see a menu like:
+---
 
-```
+### 🧭 Example Menu
+
+```text
 === Classical Ciphers Toolkit ===
 1 - Caesar | 2 - Atbash | 3 - Affine | 4 - Vigenere
 5 - Rail Fence | 6 - Columnar | 7 - Playfair | 8 - Hill
 9 - Autokey | 10 - Beaufort | 11 - Hybrid (Caesar→Atbash) | Q - Quit
 Choose:
 ```
-### 🚀 Run in Your Browser (No Installation Needed)
 
-If you cannot install Python locally, click the **Binder** button above.  
-Once the environment loads:
-
-1. Open the file `classical_ciphers_toolkit.ipynb`
-2. Run the first cell  
-3. The full cipher menu will appear in the Jupyter terminal  
-#### 🧩 Classical Ciphers Toolkit
-
-[![Launch Binder](https://mybinder.org/badge_logo.svg)](
-https://mybinder.org/v2/gh/ntious/Information-Security-Assurance-Labs/HEAD?filepath=labs/Encryption/lab_encryption_classical?urlpath=lab)
-You can now use all 11 ciphers directly in your browser.
 ---
 
 ## 🕹️ Usage Guide
 
-Each cipher has its own menu. Typical flow:
+Typical workflow:
 
-* **Encrypt** → type text + key(s) → ciphertext generated.
-* **Decrypt** → type ciphertext + key(s) → plaintext recovered.
-* Some ciphers strip spaces or pad with `X` (e.g., Hill, Playfair).
+* **Encrypt** → input plaintext + key(s) → get ciphertext
+* **Decrypt** → input ciphertext + key(s) → recover plaintext
+
+Notes:
+
+* Some ciphers remove spaces
+* Some pad text with `X` (e.g., Hill, Playfair)
+* Keys must follow cipher-specific rules
 
 ---
 
-## 📚 Learning Notes
+## 📚 Learning Concepts
 
-* **Substitution Ciphers** → Caesar, Affine, Vigenère, Atbash, Beaufort, Autokey
-* **Transposition Ciphers** → Rail Fence, Columnar
-* **Polygraphic Ciphers** → Playfair, Hill (block-based)
-* **Hybrids** → show layered security approaches
+### 🔐 Substitution Ciphers
 
-💡 This toolkit illustrates the **evolution of cryptography** from simple shifts to more complex block and polygraphic systems.
+* Caesar, Affine, Vigenère, Atbash, Beaufort, Autokey
+
+### 🔄 Transposition Ciphers
+
+* Rail Fence, Columnar
+
+### 🔢 Polygraphic Ciphers
+
+* Playfair, Hill
+
+### 🧪 Hybrid Systems
+
+* Demonstrates layered encryption approaches
+
+💡 This toolkit shows how cryptography evolved from simple substitution to structured, multi-step systems.
 
 ---
 
 ## ✅ Quick Sanity Tests
 
-Students can immediately test:
+Students can quickly verify correctness:
 
 * Caesar: `"HELLO"`, step=3 → `KHOOR` → back: `HELLO`
 * Atbash: `"HELLO WORLD"` → `SVOOL DLIOW` → back: `HELLO WORLD`
@@ -108,7 +133,7 @@ Students can immediately test:
 * Columnar: key=`ZEBRA`, `"HELLO WORLD"` → `LWDLOOERHLX` → back: `HELLOWORLD`
 * Playfair: key=`MONARCHY`, `"HELLO WORLD"` → `KBMODZBXDM` → back: `HELXLOWORLDX`
 * Hill: key=`[[3,3],[2,5]]`, `"HELLO"` → `MFNCX` → back: `HELLOX`
-* Autokey: key=`KEY`, `"HELLOWORLD"` → encrypted/decrypted test
+* Autokey: key=`KEY`, `"HELLOWORLD"` → verify encrypt/decrypt
 * Beaufort: key=`KEY`, `"HELLO"` → `DRJIY` → back: `HELLO`
 * Hybrid: step=3, `"HELLO"` → `PSLLI` → back: `HELLO`
 
@@ -116,29 +141,78 @@ Students can immediately test:
 
 ## 🛠️ Extending the Toolkit
 
-Ideas for students:
+Students can extend the project by:
 
-* Add new ciphers (e.g., ROT13, Bacon’s, Enigma simulation).
-* Add CLI options (`argparse`) for automation.
-* Try building **cipher-breaking tools** with frequency analysis.
+* Adding new ciphers (ROT13, Bacon’s cipher, Enigma simulation)
+* Implementing **frequency analysis attacks**
+* Adding CLI support using `argparse`
+* Comparing cipher strengths and weaknesses
+* Building visualization tools for cipher transformations
 
 ---
 
 ## 📖 Educational Purpose
 
-This lab connects to the course outcome:
-👉 **Understand fundamental cryptographic techniques by experimenting with classical ciphers.**
+This lab supports the learning outcome:
 
-It demonstrates the **limitations of early encryption methods**, paving the way for modern cryptography.
+👉 **Understand fundamental cryptographic techniques through hands-on experimentation**
 
----
+It highlights:
 
-🎓 **Enjoy exploring classical cryptography!**
-
-By: *I. K. Nti* (for educational purposes only)
-
+* The **limitations of classical encryption**
+* The importance of **key management**
+* Why modern cryptography is necessary
 
 ---
 
+## ⚙️ Binder Configuration (Important for Instructors)
 
+To ensure Binder works correctly, your repository must include:
 
+```text
+Information-Security-Assurance-Labs/
+├── .binder/
+│   ├── requirements.txt
+│   └── runtime.txt
+├── Encryption/
+│   └── lab_encryption_classical/
+│       ├── classical_ciphers_toolkit.py
+│       ├── README.md
+│       ├── LAB_INSTRUCTIONS.md
+│       ├── INSTRUCTOR_NOTES.md
+│       └── STUDENT_USAGE.md
+```
+
+### `.binder/requirements.txt`
+
+```txt
+numpy
+notebook
+jupyterlab
+ipykernel
+```
+
+### `.binder/runtime.txt`
+
+```txt
+python-3.11
+```
+
+> ⚠️ Binder will **fail** if environment files are not in the repo root or `.binder/`.
+
+---
+
+## 🎓 Author
+
+**I. K. Nti**
+Assistant Professor – Information Technology
+For educational use only
+
+---
+
+## 📌 Final Note
+
+This toolkit is intentionally **simple, transparent, and interactive**
+to help students *see* how encryption works — not just use it.
+
+---
