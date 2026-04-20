@@ -9,7 +9,7 @@ It allows students to explore, encrypt, decrypt, and experiment with **11 major 
 
 ## 🚀 Run in Your Browser (No Installation Needed)
 
-[![Launch Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/ntious/Information-Security-Assurance-Labs/HEAD?urlpath=lab/tree/Encryption/lab_encryption_classical)
+[![Launch Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/ntious/Information-Security-Assurance-Labs/HEAD?urlpath=lab/tree/labs/Encryption/lab_encryption_classical)
 
 Binder allows you to run this lab directly in your browser without installing Python.
 
