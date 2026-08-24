@@ -1,0 +1,35 @@
+version: 2
+updates:
+  - package-ecosystem: "pip"
+    directory: "/.binder"
+    schedule:
+      interval: "weekly"
+      day: "monday"
+      timezone: "America/New_York"
+    open-pull-requests-limit: 5
+    groups:
+      python-minor-and-patch:
+        update-types:
+          - "minor"
+          - "patch"
+
+  - package-ecosystem: "devcontainers"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+      day: "monday"
+      timezone: "America/New_York"
+    open-pull-requests-limit: 5
+
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+      day: "monday"
+      timezone: "America/New_York"
+    open-pull-requests-limit: 5
+    groups:
+      github-actions-minor-and-patch:
+        update-types:
+          - "minor"
+          - "patch"
