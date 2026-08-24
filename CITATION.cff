@@ -1,0 +1,18 @@
+cff-version: 1.2.0
+message: "If you adapt these laboratories for teaching or research, please cite the repository."
+title: "Information Security and Assurance Labs"
+type: software
+authors:
+  - family-names: Nti
+    given-names: Isaac Kofi
+    orcid: "https://orcid.org/0000-0001-9257-4295"
+repository-code: "https://github.com/ntious/Information-Security-Assurance-Labs"
+url: "https://github.com/ntious/Information-Security-Assurance-Labs"
+keywords:
+  - cybersecurity education
+  - information assurance
+  - cryptography labs
+  - TLS
+  - SSH
+  - VPN
+  - secure computing
