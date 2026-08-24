@@ -54,13 +54,13 @@ def build_html_report(out_dir: Path, report_name: str = None):
   <meta charset="utf-8"/>
   <title>Memory Forensics Report</title>
   <style>
-    body { font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, "Noto Sans", "Apple Color Emoji"; margin: 2rem; }
-    header { margin-bottom: 1.5rem; }
-    h1 { margin: 0 0 .25rem 0; }
-    .meta { color: #555; }
-    section { border: 1px solid #ddd; border-radius: 8px; padding: 1rem; margin-bottom: 1rem; background: #fafafa; }
-    pre { white-space: pre-wrap; word-wrap: break-word; }
-    footer { margin-top: 2rem; color: #666; font-size: .9rem; }
+    body {{ font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, "Noto Sans", "Apple Color Emoji"; margin: 2rem; }}
+    header {{ margin-bottom: 1.5rem; }}
+    h1 {{ margin: 0 0 .25rem 0; }}
+    .meta {{ color: #555; }}
+    section {{ border: 1px solid #ddd; border-radius: 8px; padding: 1rem; margin-bottom: 1rem; background: #fafafa; }}
+    pre {{ white-space: pre-wrap; word-wrap: break-word; }}
+    footer {{ margin-top: 2rem; color: #666; font-size: .9rem; }}
   </style>
 </head>
 <body>
@@ -73,7 +73,7 @@ def build_html_report(out_dir: Path, report_name: str = None):
   {''.join(blocks) if blocks else '<p><em>No .txt outputs found in the output directory.</em></p>'}
   <footer>Toolkit v1.1.0 • Volatility 3 helper</footer>
 </body>
-</html>r"""
+</html>"""
     report_path.write_text(html, encoding="utf-8")
     print(f"[✓] HTML report written to: {report_path}")
     return report_path
