@@ -227,18 +227,32 @@ def restore_rules(filepath: str, dry: bool):
     Restore UFW rules from a local file (overwrites user.rules).
     """
     print(f"\n[Advanced] Restore UFW rules from {filepath}.")
-    if not os.path.exists(filepath):
-        print("[Error] File does not exist.")
+    source_path = os.path.realpath(os.path.expanduser(filepath))
+    if not os.path.isfile(source_path):
+        print("[Error] Restore source must be an existing regular file.")
         return
     if dry:
         print("[dry-run] Would copy rules to /etc/ufw/user.rules and reload ufw.")
         return
-    # Copy via sudo tee
-    code, _, err = run(f"sudo sh -c 'cat {shlex.quote(filepath)} > /etc/ufw/user.rules'")
-    if code == 0:
+    # Pass the selected path as data, never as a program interpreted by a shell.
+    try:
+        with open(source_path, "rb") as source_file:
+            result = subprocess.run(
+                ["sudo", "tee", "/etc/ufw/user.rules"],
+                stdin=source_file,
+                stdout=subprocess.DEVNULL,
+                stderr=subprocess.PIPE,
+                check=False,
+            )
+    except OSError as exc:
+        print(f"[Error] Could not read restore source: {exc}")
+        return
+
+    if result.returncode == 0:
         print("[OK] Rules restored. Reloading UFW...")
         run("sudo ufw reload")
     else:
+        err = result.stderr.decode("utf-8", errors="replace").strip()
         print(f"[Error] Could not restore rules: {err}")
 
 

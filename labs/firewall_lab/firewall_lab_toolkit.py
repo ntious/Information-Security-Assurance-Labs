@@ -11,8 +11,11 @@ from pathlib import Path
 
 SUDO = "sudo "
 PIDS_FILE = Path("/tmp/firewall_lab_toolkit.pids")
-CERT_FILE = Path("./cert.pem")
-KEY_FILE = Path("./key.pem")
+STATE_DIR = Path.home() / ".local" / "share" / "firewall_lab_toolkit"
+DOC_ROOT = STATE_DIR / "www"
+TLS_DIR = STATE_DIR / "tls"
+CERT_FILE = TLS_DIR / "cert.pem"
+KEY_FILE = TLS_DIR / "key.pem"
 
 def run(cmd, check=False, capture=False):
     """Run a shell command; optionally capture output and raise on error."""
@@ -139,21 +142,67 @@ def _kill_pids():
     except FileNotFoundError:
         pass
 
+def _prepare_test_content():
+    """Create an isolated, non-sensitive document root for test servers."""
+    STATE_DIR.mkdir(parents=True, exist_ok=True, mode=0o700)
+    DOC_ROOT.mkdir(parents=True, exist_ok=True, mode=0o700)
+    TLS_DIR.mkdir(parents=True, exist_ok=True, mode=0o700)
+    for private_dir in (STATE_DIR, DOC_ROOT, TLS_DIR):
+        private_dir.chmod(0o700)
+    index_file = DOC_ROOT / "index.html"
+    if not index_file.exists():
+        index_file.write_text(
+            "<!doctype html><title>Firewall lab</title><h1>Firewall lab test server</h1>\n",
+            encoding="utf-8",
+        )
+    return DOC_ROOT
+
+
+def _choose_bind_address():
+    expose = input(
+        "Bind beyond this machine? Type EXPOSE to listen on all interfaces "
+        "(default: loopback only): "
+    ).strip()
+    return "0.0.0.0" if expose == "EXPOSE" else "127.0.0.1"
+
+
 def start_http_server():
     port = input("HTTP port (default 8000): ").strip() or "8000"
     if not port.isdigit():
         print("[!] Invalid port.")
         return
-    print(f"[i] Starting Python HTTP server on :{port} (background).")
-    proc = subprocess.Popen([sys.executable, "-m", "http.server", port], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+    doc_root = _prepare_test_content()
+    bind_address = _choose_bind_address()
+    print(f"[i] Starting Python HTTP server on {bind_address}:{port} (background).")
+    proc = subprocess.Popen(
+        [
+            sys.executable,
+            "-m",
+            "http.server",
+            port,
+            "--bind",
+            bind_address,
+            "--directory",
+            str(doc_root),
+        ],
+        stdout=subprocess.DEVNULL,
+        stderr=subprocess.DEVNULL,
+    )
     _write_pid(proc.pid)
-    print(f"[✓] HTTP server PID {proc.pid}. Try: curl http://<public-ip>:{port}")
+    print(f"[✓] HTTP server PID {proc.pid}. Try: curl http://{bind_address}:{port}")
 
 def _ensure_self_signed_cert():
+    _prepare_test_content()
     if CERT_FILE.exists() and KEY_FILE.exists():
         return
     print("[i] Generating self-signed TLS cert (1-day).")
-    run(f"openssl req -x509 -newkey rsa:2048 -keyout {KEY_FILE} -out {CERT_FILE} -days 1 -nodes -subj /CN=localhost")
+    run([
+        "openssl", "req", "-x509", "-newkey", "rsa:2048",
+        "-keyout", str(KEY_FILE), "-out", str(CERT_FILE),
+        "-days", "1", "-nodes", "-subj", "/CN=localhost",
+    ])
+    if KEY_FILE.exists():
+        KEY_FILE.chmod(0o600)
 
 def start_https_server():
     port = input("HTTPS port (default 8443): ").strip() or "8443"
@@ -161,20 +210,22 @@ def start_https_server():
         print("[!] Invalid port.")
         return
     _ensure_self_signed_cert()
+    bind_address = _choose_bind_address()
+    doc_root = _prepare_test_content()
     # Launch a tiny HTTPS server using Python stdlib in background
     code = f"""
-import http.server, ssl, socketserver
-handler = http.server.SimpleHTTPRequestHandler
-with socketserver.TCPServer(("", {int(port)}), handler) as httpd:
+import functools, http.server, ssl, socketserver
+handler = functools.partial(http.server.SimpleHTTPRequestHandler, directory={str(doc_root)!r})
+with socketserver.TCPServer(({bind_address!r}, {int(port)}), handler) as httpd:
     ctx = ssl.SSLContext(ssl.PROTOCOL_TLS_SERVER)
-    ctx.load_cert_chain(certfile="{CERT_FILE}", keyfile="{KEY_FILE}")
+    ctx.load_cert_chain(certfile={str(CERT_FILE)!r}, keyfile={str(KEY_FILE)!r})
     httpd.socket = ctx.wrap_socket(httpd.socket, server_side=True)
-    print("Serving HTTPS on {int(port)}")
+    print("Serving HTTPS on {bind_address}:{int(port)}")
     httpd.serve_forever()
 """
     proc = subprocess.Popen([sys.executable, "-c", code], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
     _write_pid(proc.pid)
-    print(f"[✓] HTTPS server PID {proc.pid}. Try: curl -k https://<public-ip>:{port}")
+    print(f"[✓] HTTPS server PID {proc.pid}. Try: curl -k https://{bind_address}:{port}")
 
 def stop_test_servers():
     _kill_pids()
