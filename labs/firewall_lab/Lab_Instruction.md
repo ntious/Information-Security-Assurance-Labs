@@ -1,202 +1,98 @@
-# 🔒 Lab: Firewall Configuration with UFW
+# Lab: Firewall Configuration with UFW
 
-## 🎯 Objective
-The purpose of this lab is to help students **understand how host-based firewalls protect services** from unauthorized access and attacks.  
-You will use **UFW (Uncomplicated Firewall)** on Ubuntu to configure rules, test services, and verify that security policies are enforced.
+**Safety level: 3 — disposable, isolated Ubuntu VM only.**
 
-This activity supports the course learning outcome:  
-👉 **Implement and verify basic access control using firewall policies.**
+## Purpose and outcomes
 
----
+Practice applying a default-deny inbound policy, allowing required test services, and verifying the configured rules. Explain how least privilege and authorization boundaries apply to host firewalls.
 
-## 📖 Background
-Firewalls are a critical first line of defense. They:
-- Restrict access to services by **port** or **protocol**
-- Limit access to trusted **IP addresses**
-- Enforce **default deny** rules so only explicitly allowed traffic gets through
+## Prerequisites and authorization
 
-**UFW** is a user-friendly front end for `iptables` that simplifies firewall management on Ubuntu.
+- Ubuntu VM that you own or are explicitly authorized to administer.
+- Local console access to the VM; do not perform this exercise over a remote session that UFW might interrupt.
+- A private, isolated network and a second authorized VM for connection tests.
+- VM snapshot or other reset path.
 
----
+Never use a public IP address or public/shared network as the target. Do not run these commands on a Codespace, shared course host, or production system.
 
-## 🛠️ Prerequisites
-- Ubuntu VM (University Sandbox or local Ubuntu installation)  
-- Sudo access on the machine  
-- Internet connection  
-- Installed tools:
-  ```bash
-  sudo apt update
-  sudo apt install -y ufw curl netcat-openbsd openssl python3
-````
+## Setup
 
----
-
-## 📝 Tasks
-
-### Step 1 – Check Network Info
+From the repository root:
 
 ```bash
-ip addr
-ss -tulpen
+cd labs/firewall_lab
+bash setup.sh
 ```
 
-👉 Record your IP address and any listening ports.
+The setup script installs UFW, curl, netcat, OpenSSL, and Python 3 on Ubuntu/Debian. Review any package changes before continuing.
 
----
+## Tasks
 
-### Step 2 – Verify Firewall Status
-
-```bash
-sudo ufw status verbose
-```
-
-Expected: `Status: inactive` on a new VM.
-
----
-
-### Step 3 – Enable Firewall
-
-```bash
-sudo ufw enable
-```
-
-⚠️ This may warn that it could disrupt SSH connections. Since we will allow SSH next, it is safe.
-
----
-
-### Step 4 – Set Default Policies
-
-```bash
-sudo ufw default deny incoming
-sudo ufw default allow outgoing
-```
-
-This ensures a **default deny** stance.
-
----
-
-### Step 5 – Allow Trusted Ports
-
-* Allow SSH (22), HTTP (80), and HTTPS (443):
-
-```bash
-sudo ufw allow 22/tcp
-sudo ufw allow 80/tcp
-sudo ufw allow 443/tcp
-```
-
----
-
-### Step 6 – Deny Insecure Ports
-
-* Deny FTP (21) and Telnet (23):
-
-```bash
-sudo ufw deny 21/tcp
-sudo ufw deny 23/tcp
-```
-
----
-
-### Step 7 – Configure IP-Based Rules
-
-* Allow SSH only from a trusted IP:
-
-```bash
-sudo ufw allow from 192.168.1.100 to any port 22
-```
-
-* Block all traffic from a malicious IP:
-
-```bash
-sudo ufw deny from 203.0.113.1
-```
-
----
-
-### Step 8 – Verify Rules
-
-```bash
-sudo ufw status numbered
-sudo ufw status verbose
-```
-
-👉 Take a screenshot of your rules.
-
----
-
-### Step 9 – Test with Services
-
-1. Start a test HTTP server:
+1. Record the VM's private lab-network address and current firewall state:
 
    ```bash
-   python3 -m http.server 8000
+   ip addr
+   sudo ufw status verbose
    ```
-2. Start a simple HTTPS server:
+
+2. Set the default policies:
 
    ```bash
-   openssl req -x509 -newkey rsa:2048 -keyout key.pem -out cert.pem -days 1 -nodes -subj "/CN=localhost"
-   python3 - <<'PY'
+   sudo ufw default deny incoming
+   sudo ufw default allow outgoing
    ```
 
-import http.server, ssl, socketserver
-handler = http.server.SimpleHTTPRequestHandler
-with socketserver.TCPServer(("", 8443), handler) as httpd:
-httpd.socket = ssl.wrap\_socket(httpd.socket, server\_side=True, certfile="cert.pem", keyfile="key.pem")
-print("Serving HTTPS on 8443")
-httpd.serve\_forever()
-PY
+3. Add only the ports used for this exercise and the denied examples:
 
-````
+   ```bash
+   sudo ufw allow 8000/tcp
+   sudo ufw allow 8443/tcp
+   sudo ufw deny 21/tcp
+   sudo ufw deny 23/tcp
+   ```
 
-3. Test access:
-```bash
-curl http://<your-ip>:8000
-curl -k https://<your-ip>:8443
-nc -vz <your-ip> 21    # should be blocked
-nc -vz <your-ip> 80    # should succeed
-````
+   Do not add a broad SSH rule for this lab. If an instructor requires a management rule, obtain the exact scope before enabling UFW and retain console access.
 
----
+4. Enable UFW from the VM console:
 
-## ✅ Deliverables
+   ```bash
+   sudo ufw enable
+   sudo ufw status numbered
+   sudo ufw status verbose
+   ```
 
-Submit the following:
+5. Start the toolkit's HTTP and HTTPS test servers on ports 8000 and 8443. They bind to loopback by default. For peer testing only, type `EXPOSE` at the bind prompt to listen on the lab interface. Do this only on the isolated network. From the second authorized VM, test the target VM's **private lab IP**:
 
-1. Screenshot of `ufw status verbose` showing correct rules:
+   ```bash
+   curl http://<private-lab-vm-ip>:8000
+   curl -k https://<private-lab-vm-ip>:8443
+   ```
 
-   * Default deny incoming / allow outgoing
-   * ALLOW 22, 80, 443
-   * DENY 21, 23
-2. Evidence of testing with `curl`/`nc`:
+   `-k` is appropriate only for this lab's self-signed test certificate. Stop the servers when testing is complete. If peer connectivity is not needed, keep the default loopback binding.
 
-   * HTTP and HTTPS succeed
-   * FTP/Telnet blocked
-3. (Optional) Evidence of IP-based rule test
-4. Run the checker:
+6. Run the rule checker on the target VM:
 
    ```bash
    bash ufw_check.sh
    ```
 
-   Include the checker output in your submission.
+   It checks that UFW is active, the default inbound/outbound policy is correct, and the expected 8000/tcp, 8443/tcp, 21/tcp, and 23/tcp rules exist. A failed connection to an unused port does not, by itself, prove that the firewall blocked it; there may be no service listening.
 
----
+## Evidence and reflection
 
-## ⚡ Reflection Questions
+Submit the numbered and verbose UFW status, the checker result, and the HTTP/TLS test results. Explain:
 
-1. Why is a **default deny** policy considered best practice?
-2. What risks are introduced by leaving ports like **21** and **23** open?
-3. How does IP-based allow/deny improve security? What are its limitations?
-4. In real-world enterprise setups, would this firewall configuration be sufficient? Why or why not?
+1. Why is default deny useful?
+2. Why should firewall changes be tested in an isolated VM with console access?
+3. What can and cannot be inferred from a failed connection test?
+4. Which access rules would be appropriate for a real service, and why should they be narrower than a lab example?
 
----
+## Cleanup
 
-## 🔑 Key Takeaways
+Use the toolkit's cleanup option to stop its test servers. After saving evidence, disable UFW only on this disposable VM if required by the instructor:
 
-* Firewalls enforce the principle of **least privilege**.
-* Always start with **default deny**, then allow only what’s needed.
-* Combine **port-based rules** with **IP-based restrictions** for stronger security.
-* Testing is critical—firewall rules are only as good as the verification steps that prove they work.
-
+```bash
+sudo ufw disable
 ```
+
+The toolkit stores its generated TLS key and certificate in its private lab data directory. Remove them when they are no longer needed, and do not copy test keys or connection results into public reports.

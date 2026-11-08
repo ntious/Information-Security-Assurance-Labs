@@ -3,7 +3,6 @@ import os
 import re
 import shlex
 import signal
-import socket
 import subprocess
 import sys
 import time
@@ -52,8 +51,11 @@ def show_status():
     print(run(SUDO + "ufw status verbose", capture=True))
 
 def enable_firewall():
-    print("[i] Enabling ufw (will set to enabled if not already).")
-    run(SUDO + "ufw --force enable")
+    print("[!] Enable UFW only on a disposable, isolated lab VM with console access.")
+    if input("Do you have console access and are you sure you want to enable UFW? [y/N]: ").strip().lower() != "y":
+        print("[i] UFW enable cancelled.")
+        return
+    run(SUDO + "ufw enable")
     show_status()
 
 def set_default_policies():
@@ -231,17 +233,9 @@ def stop_test_servers():
     _kill_pids()
 
 def quick_test():
-    host = input("Target host/IP (default: this VM public IP or localhost): ").strip()
+    host = input("Target host/IP (default: localhost): ").strip()
     if not host:
-        # Try to guess a non-loopback IP
         host = "127.0.0.1"
-        try:
-            s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
-            s.connect(("8.8.8.8", 80))
-            host = s.getsockname()[0]
-            s.close()
-        except Exception:
-            pass
     proto = input("Protocol [http/https/custom] (default http): ").strip().lower() or "http"
     port = input("Port (blank to use 80/443 for http/https): ").strip()
     if not port:
@@ -278,7 +272,7 @@ server {
         run(SUDO + "systemctl restart nginx")
     else:
         run(SUDO + "nginx -s reload || true")
-    print("[✓] Nginx allow/deny demo listening on :8080. Try curl http://<public-ip>:8080")
+    print("[✓] Nginx allow/deny demo listening on :8080. Test only from an authorized peer on the private lab network.")
 
 def banner():
     print("""
