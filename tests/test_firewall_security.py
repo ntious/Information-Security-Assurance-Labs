@@ -67,3 +67,30 @@ def test_external_bind_requires_exact_opt_in():
         assert toolkit._choose_bind_address() == "127.0.0.1"
     with patch("builtins.input", return_value="EXPOSE"):
         assert toolkit._choose_bind_address() == "0.0.0.0"
+
+
+def test_firewall_enable_requires_confirmation():
+    toolkit = _load_module(
+        "firewall_lab_toolkit_enable", "labs/firewall_lab/firewall_lab_toolkit.py"
+    )
+    with (
+        patch("builtins.input", return_value=""),
+        patch.object(toolkit, "run") as run,
+    ):
+        toolkit.enable_firewall()
+
+    run.assert_not_called()
+
+
+def test_firewall_enable_uses_confirmation_without_force():
+    toolkit = _load_module(
+        "firewall_lab_toolkit_enable_confirmed",
+        "labs/firewall_lab/firewall_lab_toolkit.py",
+    )
+    with (
+        patch("builtins.input", return_value="y"),
+        patch.object(toolkit, "run") as run,
+    ):
+        toolkit.enable_firewall()
+
+    assert run.call_args_list[0].args[0] == "sudo ufw enable"

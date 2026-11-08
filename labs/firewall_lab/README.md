@@ -1,44 +1,35 @@
-# 🛡 Firewall Configuration Lab (Ubuntu + ufw)
+# Firewall Configuration Lab (Ubuntu + UFW)
 
-**Run ONLY on an Ubuntu VM or local Ubuntu** (not Codespaces).  
-You’ll practice real kernel-level firewalling with `ufw` and verify behavior with test services.
+**Safety level: 3 — disposable, isolated Ubuntu VM only.** This lab changes host firewall rules and starts network services. Do not run it in Codespaces, on a shared or production host, or on a machine managed over a remote connection that UFW could interrupt. Keep console access and take a VM snapshot before starting.
 
 ## Objectives
-- Set default policies (deny incoming / allow outgoing)
-- Allow/deny specific ports (22, 80, 443, 21, 23)
-- Allow from specific IPs; deny malicious IPs
-- Spin up simple HTTP/HTTPS test servers and verify with curl/nc
-- (Optional) App-layer allow/deny with Nginx
 
-## Prereqs
-Ubuntu 22.04/24.04 with `sudo` access and internet.
+- Set a default-deny inbound policy.
+- Allow the lab's HTTP/TLS test ports and deny two unused example ports.
+- Verify rules and controlled service connectivity from an authorized peer.
 
-## Quick Start
+## Prerequisites
+
+- An Ubuntu VM that you own or are explicitly authorized to administer.
+- Console access to the VM and a private, isolated lab network.
+- A second authorized VM on that network to test inbound connectivity.
+
+## Quick start
+
 ```bash
 cd labs/firewall_lab
-bash setup.sh           # installs ufw, curl, netcat, openssl, (optional) nginx
+bash setup.sh
 python3 firewall_lab_toolkit.py
 ```
-## What to Submit
-* Screenshot of ufw status verbose after:
-* default deny incoming / allow outgoing
-* allows: 22/tcp, 80/tcp, 443/tcp
-* denies: 21/tcp, 23/tcp
-* Evidence of tests:
-* curl http://<public-ip>:80 success
-* curl -k https://<public-ip>:443 success (self-signed)
-* nc -vz <public-ip> 21 fails
-## (Optional) IP allow/deny test results
-Run the checker:
-  ```bash
+
+Follow [Lab_Instruction.md](Lab_Instruction.md) for rule order, service testing, validation, and cleanup. The toolkit's test servers bind to loopback by default. For the isolated-VM peer test only, explicitly type `EXPOSE` at the bind prompt to listen on the lab interface; never expose them to public or shared networks. The checker validates the active firewall policy and expected rules:
+
+```bash
 bash ufw_check.sh
 ```
-Include the checker’s output in your submission.
-## Cleanup
-stop background test servers started by the toolkit (menu option 13)
-(Optional) disable ufw if this is a shared host
-  ```bash
-sudo ufw disable
-```
-Note: Codespaces is great for simulations, but ufw there won’t gate real ingress. Use your university sandbox VM for this lab.
 
+The checker does not prove that a port is reachable or blocked from a peer. A failed connection can also mean that no service is listening; use the rule output and controlled service tests as separate evidence.
+
+## Cleanup
+
+Stop test servers using the toolkit's cleanup option. After saving your results, disable UFW only on this disposable VM if the instructor requires it. Do not disable firewall protections on any shared or production system.

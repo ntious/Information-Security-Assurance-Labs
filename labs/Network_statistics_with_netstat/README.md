@@ -1,24 +1,15 @@
 # Netstat Lab Helper — Package
 
-<<<<<<< HEAD
-This package contains:
-- `netstat_lab_helper.py` — updated menu-driven helper for Tasks 2–4
-- `Task4_Reflection_Template.docx` — a fill‑in reflection doc
-- This README
-=======
-This README accompanies `netstat_lab_helper.py`, a menu‑driven helper for the **Network Statistics Using netstat**. It’s designed for freshmen and runs on your **Sandbox Ubuntu VM**.
->>>>>>> f49c36459c093bb9b27aafdad1a239785737a739
+This package contains the menu-driven `netstat_lab_helper.py`, this lab handout, and (where provided) the Task 4 reflection template. Use the helper only in the authorized course sandbox VM.
 
 ## How to run
 ```bash
 # if netstat is missing
 sudo apt update && sudo apt install -y net-tools
 
-<<<<<<< HEAD
 # recommended to see PIDs/program names
 sudo -E python3 netstat_lab_helper.py
 ```
-=======
 ---
 ## Prerequisites
 - Sandbox Ubuntu VM
@@ -27,11 +18,7 @@ sudo -E python3 netstat_lab_helper.py
   ```bash
   sudo apt update && sudo apt install -y net-tools
   ```
-- Ensure the **MySQL container (`mysqlData`)** is running in Sandbox.
-
-> **Credentials (from lab brief):**
-> - Login: `admin` / `infosecure123456789`
-> - VM Password: `Pa$$w0rd`
+- Ensure the instructor-provided MySQL container is running if it is required for your course activity. Obtain login details through the approved course platform; do not store them in this repository.
 
 ---
 ## Quick Start
@@ -110,8 +97,8 @@ A: Screenshots are required; snapshots are helpful supplements.
 
 ---
 ### Setup
-1. Login to **UC Sandbox** → Ubuntu VM (admin/infosecure123456789).
-2. Ensure **`mysqlData`** container is **running** in the Containers UI.
+1. Sign in to the authorized course sandbox and open its Ubuntu VM.
+2. Ensure the instructor-provided MySQL container is running if required.
 3. On the VM, open **Terminal** and run:
    ```bash
    sudo apt update && sudo apt install -y net-tools   # if netstat is missing
@@ -121,7 +108,7 @@ A: Screenshots are required; snapshots are helpful supplements.
    python3 netstat_lab_helper.py
    ```
 
-> **Screenshot 1 Required:** UC Sandbox → Containers page showing **`mysqlData`** active. Also open the MySQL interface on your VM desktop and capture a screenshot.
+> **Screenshot 1 Required:** Show the instructor-provided database container running, if required. Do not include passwords, tokens, or other sensitive information.
 
 ---
 ### Task 2 — Identify Active Connections (Simulated Attack Scenario)
@@ -179,8 +166,6 @@ A: Screenshots are required; snapshots are helpful supplements.
 - Accept `ss` outputs as equivalent to `netstat`.
 - If container UI is preferred to CLI for MySQL verification, that’s fine; require the **PID** to be documented in evidence.
 - Encourage students to annotate screenshots (PID circled, timestamp visible).
->>>>>>> f49c36459c093bb9b27aafdad1a239785737a739
-
 ## Notes
 - Option 2 now checks ports **3306** and **33060** and includes a **deep hunt** for
   LISTEN + UNIX sockets, so you always have something useful to document.

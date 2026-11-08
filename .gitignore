@@ -6,6 +6,13 @@ labs/Encryption/lab_encryption_modern/01_openssl/secret.enc
 
 labs/Encryption/lab_encryption_modern/02_tls/cert.pem
 labs/Encryption/lab_encryption_modern/02_tls/key.pem
+
+# Generated firewall lab certificate and private key
+labs/firewall_lab/cert.pem
+labs/firewall_lab/key.pem
+
+# Generated lab output
+labs/Network_statistics_with_netstat/lab_outputs/
 __pycache__/
 *.pyc
 .env
@@ -14,4 +21,3 @@ __pycache__/
 .ipynb_checkpoints/
 .vscode/
 .idea/
-

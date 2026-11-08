@@ -75,10 +75,12 @@ You can run labs in **GitHub Codespaces** (recommended) or locally.
 ### Option 2: Run Locally
 
 ```bash
-git clone https://github.com/<your-username>/<repo-name>.git
-cd <repo-name>
-pip install -r requirements.txt
+git clone https://github.com/ntious/Information-Security-Assurance-Labs.git
+cd Information-Security-Assurance-Labs
+make check
 ```
+
+There is no root `requirements.txt`; individual labs document their own prerequisites.
 
 ---
 
