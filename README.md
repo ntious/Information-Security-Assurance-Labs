@@ -118,6 +118,12 @@ Students will learn both **foundational principles** (classical ciphers, asset i
 
 ---
 
+## Cite this repository
+
+For the archived v1.0.0 release, cite [DOI 10.5281/zenodo.24047166](https://doi.org/10.5281/zenodo.24047166). The [concept DOI 10.5281/zenodo.24047165](https://doi.org/10.5281/zenodo.24047165) identifies the project across versions.
+
+---
+
 ## 📜 License
 
 This repository is licensed under the **MIT License** for educational use only.
