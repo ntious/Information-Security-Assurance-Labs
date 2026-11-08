@@ -52,10 +52,10 @@ check_rule() {
   fi
 }
 
-check_rule "allow TCP 8000" '8000/tcp[[:space:]]+ALLOW IN'
-check_rule "allow TCP 8443" '8443/tcp[[:space:]]+ALLOW IN'
-check_rule "deny TCP 21" '21/tcp[[:space:]]+DENY IN'
-check_rule "deny TCP 23" '23/tcp[[:space:]]+DENY IN'
+check_rule "allow TCP 8000" '^[[:space:]]*\[[[:space:]]*[0-9]+\][[:space:]]+8000/tcp[[:space:]]+ALLOW IN'
+check_rule "allow TCP 8443" '^[[:space:]]*\[[[:space:]]*[0-9]+\][[:space:]]+8443/tcp[[:space:]]+ALLOW IN'
+check_rule "deny TCP 21" '^[[:space:]]*\[[[:space:]]*[0-9]+\][[:space:]]+21/tcp[[:space:]]+DENY IN'
+check_rule "deny TCP 23" '^[[:space:]]*\[[[:space:]]*[0-9]+\][[:space:]]+23/tcp[[:space:]]+DENY IN'
 
 if [ "$failed" -eq 0 ]; then
   echo "Checker passed."
