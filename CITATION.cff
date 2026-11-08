@@ -2,6 +2,8 @@ cff-version: 1.2.0
 message: "If you adapt these laboratories for teaching or research, please cite the repository."
 title: "Information Security and Assurance Labs"
 type: software
+version: 1.0.0
+doi: "10.5281/zenodo.24047166"
 authors:
   - family-names: Nti
     given-names: Isaac Kofi
